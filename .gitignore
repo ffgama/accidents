@@ -350,7 +350,7 @@ MigrationBackup/
 .ionide/
 
 # Workspace
-.code-workspace
+*.code-workspace
 
 # settings
 settings.json
