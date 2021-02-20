@@ -1,2 +1,2 @@
-# accidents
-Open data from PRF about accidents on brazil roads
+# Accidents
+Open data from PRF about accidents on brazil roads.
