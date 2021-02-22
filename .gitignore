@@ -352,5 +352,11 @@ MigrationBackup/
 # Workspace
 *.code-workspace
 
-# settings
+# Settings
 settings.json
+
+# ZIP files
+*.zip
+
+# RAR files
+*.rar
