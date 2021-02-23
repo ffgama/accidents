@@ -52,7 +52,7 @@ def download_all_files(links_df):
         links_df ([str]): specific url of the file that will downloaded.
     """   
     END_PATH = '/download'
-    TARGET_PATH = getcwd()+'/data/'
+    TARGET_PATH = getcwd()+'/data/external/'
     FILENAME_SAVED = 'data_'
      
     for index, row in links_df.iterrows():
@@ -94,7 +94,7 @@ def unrar_files(path_zipped_file, tmp_dir=TEMP_DIR):
     temp = tmp_dir
     rar.extractall(path=temp)
     
-list_rar_files = glob(pathname='data/'+'*.rar')
+list_rar_files = glob(pathname='data/external/'+'*.rar')
 # persistance on local disk /tmp
 csv_temp_files = list(map(unrar_files, list_rar_files))
 
@@ -110,7 +110,7 @@ def open_data_files(format_compress, tmp_dir=TEMP_DIR):
     """    
     
     temp_files = glob(tmp_dir+"*.csv")
-    zip_files = glob('data/'+'*.zip')
+    zip_files = glob('data/external/'+'*.zip')
 
     if format_compress=='rar':    
         for i in range(0, len(temp_files)):
@@ -131,3 +131,5 @@ data_accidents
 
 # removing local temporary files
 rmtree(TEMP_DIR)
+
+data_accidents.to_csv('data/'+'raw_accidents.csv.gz', sep=";", index=False, compression='gzip')

@@ -360,3 +360,6 @@ settings.json
 
 # RAR files
 *.rar
+
+# CSV GZ
+*.csv.gz
