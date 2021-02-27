@@ -3,12 +3,14 @@ from pandas import (
 )
 set_option('display.max_columns', None)
 
-DATA_PATH = 'data/raw_accidents.csv.gz'
+INPUT_PATH = 'data/raw_accidents.csv.gz'
+OUTPUT_PATH = 'data/pre_processed_data/data_accidents.csv.gz'
 
-open_data = read_csv(DATA_PATH, sep=";", compression='gzip')
+open_data = read_csv(INPUT_PATH, sep=";", compression='gzip')
 open_data.info()
 
 def remove_columns(dataset: DataFrame, columns) -> DataFrame:
+    
     dataset = dataset.drop(columns=columns, axis=1)
     return dataset
     
@@ -31,6 +33,7 @@ def filter_not_null_str(dataset: DataFrame, column: str) -> DataFrame:
     return dataset   
 
 def convert_to_datetime(dataset: DataFrame, column: str) -> DataFrame:
+    
     dataset[column] = to_datetime(dataset[column])
     return dataset
 
@@ -38,6 +41,7 @@ def unite_two_columns(dataset: DataFrame,
                   first_column: str, 
                   second_column: str,
                   new_column: str) -> DataFrame:
+    
     dataset[new_column] = dataset[first_column] +'-'+ dataset[second_column] 
     return dataset
 
@@ -52,6 +56,7 @@ def replace_repeated_values(dataset: DataFrame, column:str)-> DataFrame:
     return dataset
 
 def extract_hour_from_time(dataset: DataFrame, new_column:str) -> DataFrame:
+    
     data_transf[new_column] = to_datetime(data_transf['horario'], format="%H:%M:%S").dt.hour
     return dataset
     
@@ -66,7 +71,6 @@ data_transf = filter_not_null_str(data_transf, column='fase_dia')
 data_transf = filter_not_null_str(data_transf, column='condicao_metereologica')
 data_transf = filter_not_null_str(data_transf, column='tipo_pista')
 
-
 data_transf = convert_to_datetime(dataset=data_transf, column='data_inversa')
 data_transf = unite_two_columns(dataset=data_transf, 
                                 first_column='municipio',
@@ -74,3 +78,6 @@ data_transf = unite_two_columns(dataset=data_transf,
                                 new_column='cidade_uf')
 data_transf = replace_repeated_values(dataset=data_transf, column='dia_semana')
 data_transf = extract_hour_from_time(dataset=data_transf, new_column='hour')
+
+data_transf.to_csv(OUTPUT_PATH,
+                   sep=";", index=False, compression='gzip')
