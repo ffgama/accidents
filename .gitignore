@@ -5,6 +5,12 @@ __pycache__/
 # Workspace
 *.code-workspace
 
+# environment variables
+*.env
+
+# rstudio
+*.rstudio
+
 # Settings
 settings.json
 
