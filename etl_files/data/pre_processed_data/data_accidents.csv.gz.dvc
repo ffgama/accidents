@@ -1,0 +1,4 @@
+outs:
+- md5: 8e994014c9f9ef3aa9ce020175a4f7b7
+  size: 46152487
+  path: data_accidents.csv.gz
