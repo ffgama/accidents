@@ -22,3 +22,5 @@ settings.json
 
 # CSV GZ
 *.csv.gz
+
+.R/
